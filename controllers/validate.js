@@ -108,7 +108,7 @@ var validatePhoneNumber = function (req, phoneNumber) {
 				}
 
 				/* validate if the voiceUrl is configured and points to this server */
-				const voiceUrl = req.protocol + '://' + req.hostname + '/api/ivr/welcome'
+				const voiceUrl = req.protocol + '://' + req.hostname + '/api/ivr/direct'
 
 				if (phoneNumbers[0].voiceUrl !== voiceUrl) {
 					reject('TWILIO_PHONE_NUMBER_VOICE_URL_INVALID')

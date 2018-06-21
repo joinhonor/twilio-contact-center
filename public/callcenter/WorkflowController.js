@@ -19,7 +19,7 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 	$scope.UI = { warning: { browser: null, worker: null, phone: null}};
 
 	if ($window.location.protocol !== 'https:') {
-		let message =  `Depending on your browser and/or settings capturing audio and video 
+		let message =  `Depending on your browser and/or settings capturing audio and video
 										requires a secure (HTTPS) page. The demo may not work.`;
 		$scope.UI.warning.browser = message;
 	}
@@ -228,14 +228,23 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 		if (reservation.task.attributes.channel === 'phone' && reservation.task.attributes.type === 'inbound_call') {
 
 			$log.log('dequeue reservation with  callerId: ' + $scope.configuration.twilio.callerId);
-			reservation.conference($scope.configuration.twilio.callerId, undefined, undefined, function (err, reservation) {
+
+			var options = {
+				"From": $scope.configuration.twilio.callerId,
+				"EndConferenceOnExit": "true"
+			};
+
+			reservation.conference(null, null, null, null, function (err, reservation) {
 
 				if (err) {
 					$log.error(err);
 					return;
 				}
 
-			});
+			}, options);
+
+			$log.info('[Honor] Trying to pop window');
+			window.open('https://www-admin.joinhonor.com/admin/users?q=' + reservation.task.attributes.caller, '_blank');
 
 		}
 

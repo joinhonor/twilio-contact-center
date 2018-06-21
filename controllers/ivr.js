@@ -2,6 +2,28 @@ const Twilio 	= require('twilio')
 
 const taskrouterHelper = require('./helpers/taskrouter-helper.js')
 
+module.exports.direct = function (req, res) {
+	const twiml =  new Twilio.twiml.VoiceResponse()
+	twiml.say('Thanks for calling Honor')
+
+	/* create task attributes */
+	const attributes = {
+		text: 'Direct call',
+		channel: 'phone',
+		phone: req.query.From,
+		name: req.query.From,
+		title: 'Inbound call',
+		type: 'inbound_call',
+		team: 'sales'
+	}
+
+	twiml.enqueue({
+		workflowSid: req.configuration.twilio.workflowSid,
+	}).task({priority: 1, timeout: 3600}, JSON.stringify(attributes))
+
+	res.send(twiml.toString())
+}
+
 module.exports.welcome = function (req, res) {
 	const twiml =  new Twilio.twiml.VoiceResponse()
 
@@ -98,7 +120,7 @@ module.exports.selectTeam = function (req, res) {
 
 		twiml.enqueue({
 			workflowSid: req.configuration.twilio.workflowSid,
-		}).task({priority: 1, timeout: 3600}, JSON.stringify(attributes));
+		}).task({priority: 1, timeout: 3600}, JSON.stringify(attributes))
 
 	}
 

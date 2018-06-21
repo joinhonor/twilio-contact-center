@@ -66,11 +66,11 @@ module.exports.update = function (req, res) {
 					queue: config.queues[i].taskQueueSid
 				}
 
-				if(config.queues[i].targetWorkerExpression) {
+				if (config.queues[i].targetWorkerExpression) {
 					target.expression = config.queues[i].targetWorkerExpression
 				}
 
-				let item = {			
+				let item = {
 					targets: [target],
 					expression: config.queues[i].expression
 				}

@@ -1,6 +1,6 @@
 {
 	"ivr": {
-		"text": "Thanks for calling. You can press a key or say the department name. Press 1 for Sales, press 2 for Support",
+		"text": "Thanks for calling Honor",
 		"options": [
 			{
 				"friendlyName": "Sales",

@@ -129,6 +129,7 @@ router.route('/phone/hold').post(phone.hold)
 /* routes for IVR */
 var ivr = require('./controllers/ivr.js')
 
+router.route('/ivr/direct').get(ivr.direct)
 router.route('/ivr/welcome').get(ivr.welcome)
 router.route('/ivr/select-team').get(ivr.selectTeam)
 router.route('/ivr/create-task').get(ivr.createTask)
